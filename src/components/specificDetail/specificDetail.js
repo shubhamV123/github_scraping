@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Segment, Table, Icon, Container,Header } from 'semantic-ui-react';
+import {  Table, Container,Header,Segment } from 'semantic-ui-react';
+
 
 import '../../index.css'
+
+import SpecificTableFirst from './container/specificTable1';
+import SpecificTableSecond from './container/specificTable2';
+
 
 class SpecificDetails extends Component {
     constructor(props) {
@@ -19,7 +24,6 @@ class SpecificDetails extends Component {
         }
     }
     componentWillMount(props) {
-        console.log(this.props);
         this.setState({
             loading: true
         });
@@ -30,7 +34,7 @@ class SpecificDetails extends Component {
                 console.log(res.data);
                 this.setState({
                     owner: repoOwner,
-                    description: repoDescription.length>0?repoDescription:'No description has been found for this repo',
+                    description: repoDescription.length>0?repoDescription:'No description has been found for this repository',
                     updatedAt: lastUpdated,
                     repository: this.props.match.params.term,
                     projects: res.data.length > 0 ? res.data : 0,
@@ -40,9 +44,7 @@ class SpecificDetails extends Component {
                 })
             })
     }
-    componentWillReceiveProps(prop) {
-        console.log(this.props);
-    }
+
     projectTable() {
         return this.state.projects.map(project => {
             let url = 'https://github.com/' + project.projectUrl;
@@ -88,57 +90,17 @@ class SpecificDetails extends Component {
                 <Container className='container'>
                 <Header as='h1' content={this.state.text} textAlign='center' />
                     <Segment loading={this.state.loading}>
-                        <Table celled striped>
-                            <Table.Header>
-                                <Table.Row>
-                                    <Table.HeaderCell colSpan='3'>Git Repository</Table.HeaderCell>
-                                </Table.Row>
-                            </Table.Header>
-
-                            <Table.Body>
-                                <Table.Row>
-                                    <Table.Cell collapsing>
-                                        <b>OWNER</b>
-                                    </Table.Cell>
-                                    <Table.Cell>{this.state.owner}</Table.Cell>
-                                </Table.Row>
-                                <Table.Row>
-                                    <Table.Cell>
-                                        <b>REPOSITORY</b>
-                                    </Table.Cell>
-                                    <Table.Cell>{this.state.repository}</Table.Cell>
-                                </Table.Row>
-                                <Table.Row>
-                                    <Table.Cell>
-                                        <b>DESCRIPTION</b>
-                                    </Table.Cell>
-                                    <Table.Cell>{this.state.description}</Table.Cell>
-                                </Table.Row>
-                                <Table.Row>
-                                    <Table.Cell collapsing>
-                                        <b> LAST UPDATED AT</b>
-                                    </Table.Cell>
-                                    <Table.Cell>{this.state.updatedAt}</Table.Cell>
-
-                                </Table.Row>
-                                <Table.Row>
-                                    <Table.Cell collapsing>
-                                        <b> LINK TO REPOSITORY</b>
-                                    </Table.Cell>
-                                    <Table.Cell><a href={this.state.linkToRepo}>CLICK HERE</a></Table.Cell>
-
-                                </Table.Row>
-                                <Table.Row>
-                                    <Table.Cell colSpan='3'></Table.Cell>
-                                </Table.Row>
-                                {/* {this.projectTable()} */}
-                            </Table.Body>
-
-                        </Table>
+                        
+                    <SpecificTableFirst 
+                        owner = {this.state.owner}
+                        description = {this.state.description}
+                        updatedAt = {this.state.updatedAt}
+                        repository = {this.state.repository}
+                        linkToRepo = {this.state.linkToRepo}
+                        />
 
 
-
-                        {this.state.projects.length > 0 ?this.projectTableShell():<Segment>
+                        {this.state.projects.length > 0 ?<SpecificTableSecond projects={this.state.projects}/>:<Segment>
                             <center><h1>NO PROJECT IS ASSOCIATED WITH THIS REPOSITORY</h1></center>
                             </Segment>}
 
