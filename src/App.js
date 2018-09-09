@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link,Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 
 import './App.css';
 
 import InputSearch from './components/inputSearch';
 import SearchList from './components/SearchList/searchList';
+import SpecificDetails from './components/specificDetail/specificDetail';
 class App extends Component {
   render() {
     return (
@@ -13,7 +14,7 @@ class App extends Component {
           <Route exact path="/" component={InputSearch} />
 
           <Route path="/search/:term" component={SearchList} />
-          {/* <Route component={NoMatch} /> */}
+          <Route path="/:repoName/:term" component={SpecificDetails} />
         </Switch>
       </BrowserRouter>
 
