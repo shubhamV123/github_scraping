@@ -12,7 +12,6 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={InputSearch} />
-
           <Route path="/search/:term" component={SearchList} />
           <Route path="/:repoName/:term" component={SpecificDetails} />
         </Switch>
