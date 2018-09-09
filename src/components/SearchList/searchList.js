@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import { Segment,Container,Header } from 'semantic-ui-react';
-import { Link } from 'react-router-dom'
+import SegmentGenerate from './container/segmentGenerate';
 class SearchList extends Component {
     constructor(props) {
         super(props);
@@ -13,7 +13,7 @@ class SearchList extends Component {
         }
     }
     componentWillMount() {
-        console.log(this.props);
+        document.addEventListener('contextmenu', event => event.preventDefault());
         this.setState({ loading: true });
         axios
             .get('http://localhost:5000/search/' + this.props.match.params.term)
@@ -27,6 +27,9 @@ class SearchList extends Component {
                 });
             })
     }
+    componentWillUnmount(){
+        document.removeEventListener('contextmenu', event => event.preventDefault());
+    }
 
     
     render() {
@@ -37,7 +40,7 @@ class SearchList extends Component {
                 {this.state.clickText?<Header as='h4' content='Click on the repo to know more' textAlign='center' />:null}
                 <Segment loading={this.state.loading}>
                     {this.state.data.length>0?this.state.data.map((data,i) => {
-                        return <Segment key={i} ><Link to={{ pathname:'/'+  data.repoHeading, state: { data: data} }}><h3 style={{color:'black'}}>{data.repoHeading}</h3></Link></Segment>
+                        return <SegmentGenerate key={i} data = {data}/>
                     }):<Segment><center><h1>NO DATA FOUND</h1></center></Segment>}
                 </Segment>
                 </Container>
