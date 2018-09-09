@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import { Segment,Container,Header } from 'semantic-ui-react';
 import SegmentGenerate from './container/segmentGenerate';
+import {url} from '../../utils';
 class SearchList extends Component {
     constructor(props) {
         super(props);
@@ -13,10 +14,11 @@ class SearchList extends Component {
         }
     }
     componentWillMount() {
+        console.log(url);
         document.addEventListener('contextmenu', event => event.preventDefault());
         this.setState({ loading: true });
         axios
-            .get('http://localhost:5000/search/' + this.props.match.params.term)
+            .get(url+'api/search/' + this.props.match.params.term)
             .then(res => {
                 console.log(res);
                 this.setState({

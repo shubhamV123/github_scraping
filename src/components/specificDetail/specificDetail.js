@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {  Table, Container,Header,Segment } from 'semantic-ui-react';
+import {url} from '../../utils';
 
 
 import '../../index.css'
@@ -29,7 +30,7 @@ class SpecificDetails extends Component {
         });
         let { repoHeading, repoOwner, repoDescription, lastUpdated } = this.props.location.state.data;
         axios
-            .get('http://localhost:5000/detail' + this.props.location.pathname)
+            .get(url+'api/detail' + this.props.location.pathname)
             .then(res => {
                 console.log(res.data);
                 this.setState({
