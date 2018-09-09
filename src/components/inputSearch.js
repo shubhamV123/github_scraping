@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, Container,Header,Form,Icon,Message } from 'semantic-ui-react';
+import { Input, Container,Header,Form,Icon,Message, Responsive } from 'semantic-ui-react';
 
 import './inputSearch.css';
 
@@ -27,6 +27,7 @@ class InputSearch extends Component {
     render() {
         return (
             <div>
+                <Responsive minWidth={767}>
                 <Container style={{ margin: '0',
                 paddingTop:'20rem',
                 width:"50%" }}>
@@ -45,6 +46,27 @@ class InputSearch extends Component {
                         />
                 </Form>
                 </Container>
+                </Responsive>
+                <Responsive maxWidth={768}>
+                <Container style={{ margin: '0',
+                paddingTop:'50%',
+                width:"50%" }}>
+                <Header as='h1' content='GITSEARCH' className='inputh1' textAlign='center' />
+                <Header as='h5' content='Search all git repo.Simply enter keyword such as Google,node' className='inputh2' textAlign='center' />
+                <Form onSubmit={this.handleSubmit} error={this.state.error}>
+                    <Input icon={<Icon name='search'/>}
+                        fluid
+                        name='searchTerm'
+                        placeholder='Search here git repository '
+                        />
+                        <Message
+                            error
+                        header='Input Field Is Empty'
+                        content='Please Enter Keyword to search the repository'
+                        />
+                </Form>
+                </Container>
+                </Responsive>
             </div>
         )
     }
