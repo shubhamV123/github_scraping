@@ -2,7 +2,7 @@
   "name": "frontendgitsearch",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://shubhamV123.github.io/github_scraping",
+  "homepage": "http://shubhamv123.github.io/github_scraping",
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.5.0",

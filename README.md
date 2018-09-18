@@ -8,7 +8,7 @@ Goto the project folder and install required dependencies:
 npm install
 ```
 
-##### Note: change directory to react-cart before going further installation.
+##### Note: change directory to github_scraping before going further installation.
 
 Start the server:
 
