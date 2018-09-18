@@ -19,7 +19,7 @@ function TableRowGenerate(props) {
 }
 
 function SpecificTableSecond(props) {
-    return (
+    return ( 
         <React.Fragment>
             <Table celled striped>
                 <Table.Header>
